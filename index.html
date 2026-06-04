@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muthiri — Portfolio & Archive</title>
+  <meta name="description" content="Digital monograph, conceptual archive, and academic publication platform of Muthiri, multidisciplinary designer, artist, and researcher.">
+  
+  <!-- Preconnect Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Grainy Noise Overlay for Museum Texture -->
+  <div class="noise-overlay"></div>
+
+  <!-- Custom Cursor for Desktop -->
+  <div id="custom-cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- Screen Curtain for Seamless Transitions -->
+  <div class="transition-curtain">
+    <div class="curtain-panel"></div>
+    <div class="curtain-logo">MUTHIRI</div>
+  </div>
+
+  <!-- Global Header / Floating Navigation -->
+  <header class="site-header">
+    <div class="header-logo">
+      <a href="#/" id="nav-home-logo" class="hover-trigger" data-cursor="magnetic">
+        <span class="logo-text">MUTHIRI</span>
+        <span class="logo-sub">ARCHIVE</span>
+      </a>
+    </div>
+    
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+      <ul class="nav-links">
+        <li><a href="#/work" class="nav-link hover-trigger" data-link="work">Work</a></li>
+        <li><a href="#/writing" class="nav-link hover-trigger" data-link="writing">Writing</a></li>
+        <li><a href="#/about" class="nav-link hover-trigger" data-link="about">About</a></li>
+        <li><a href="#/contact" class="nav-link hover-trigger" data-link="contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Sound & System Controls -->
+    <div class="header-controls">
+      <button class="sound-toggle hover-trigger" id="sound-btn" aria-label="Toggle exhibition hum" data-cursor="magnetic">
+        <span class="sound-wave">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </span>
+        <span class="sound-label">SOUND OFF</span>
+      </button>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle hover-trigger" id="menu-toggle" aria-label="Toggle menu">
+        <span class="toggle-bar"></span>
+        <span class="toggle-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Fullscreen Menu -->
+  <div class="mobile-menu" id="mobile-menu-overlay">
+    <nav class="mobile-nav">
+      <ul class="mobile-nav-links">
+        <li><a href="#/work" class="mobile-link">Work</a></li>
+        <li><a href="#/writing" class="mobile-link">Writing</a></li>
+        <li><a href="#/about" class="mobile-link">About</a></li>
+        <li><a href="#/contact" class="mobile-link">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-footer">
+      <p class="menu-label">MULTIDISCIPLINARY ARCHIVE ©2026</p>
+      <a href="#/contact" class="mobile-link-small">Get in touch</a>
+    </div>
+  </div>
+
+  <!-- Dynamic Page Mount Point -->
+  <main id="app-content"></main>
+
+  <!-- Global Audio Element (using Web Audio API, controlled in app.js) -->
+  
+  <!-- Core Logic script -->
+  <script src="app.js"></script>
+</body>
+</html>
