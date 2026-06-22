@@ -1,12 +1,21 @@
-"use client";
-
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { projectsQuery } from "@/sanity/lib/queries";
 import Link from "next/link";
-import { useParallax } from "@/hooks/useParallax";
 
-export default function HomePage() {
-  useParallax();
-
+type Project = {
+  _id: string;
+  title: string;
+  type: string;
+  slug?: {
+    current: string;
+  };
+  coverImage?: any;
+};
+export default async function HomePage() {
+  const projects: Project[] = await client.fetch(projectsQuery);
   return (
+
     <section className="flex flex-col justify-center min-h-screen pt-[180px] pb-[100px]" style={{ paddingLeft: "var(--site-padding-x)", paddingRight: "var(--site-padding-x)" }}>
       <div className="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] items-center gap-[6vw] mb-[12vh]">
         <div className="flex flex-col">
@@ -61,34 +70,49 @@ export default function HomePage() {
           </h3>
         </div>
 
-        <Link
-          href="/work/design/transient-spaces"
-          className="featured-card hover-trigger inline-block align-top w-[480px] max-sm:w-[320px] flex-shrink-0 no-underline text-inherit"
-        >
-          <div className="w-full aspect-[16/10] overflow-hidden border border-white/5 mb-[20px]">
-            <img src="/assets/design-1.png" alt="Transient Spaces Monograph" className="w-full h-full object-cover grayscale transition-all duration-[1200ms] hover:scale-[1.05] hover:grayscale-0" />
-          </div>
-          <div className="flex justify-between items-baseline border-b border-border-muted pb-[12px] mb-[10px]">
-            <span className="font-display text-[0.65rem] font-bold tracking-[0.1em] uppercase text-fg-secondary">DESIGN ARCHIVE</span>
-            <span className="font-sans text-[0.75rem] text-fg-muted">01 / 02</span>
-          </div>
-          <h4 className="font-serif text-[1.8rem] font-light leading-[1.2]">Transient Spaces Monograph</h4>
-        </Link>
+        {projects?.length > 0 ? (
+          projects.map((project: Project, index: number) => (<Link
+            key={project._id}
+            href={`/work/${project.slug?.current || "#"}`}
+            className="featured-card hover-trigger inline-block align-top w-[480px] max-sm:w-[320px] flex-shrink-0 no-underline text-inherit"
+          >
+            <div className="w-full aspect-[16/10] overflow-hidden border border-white/5 mb-[20px]">
+              <img
+                src={
+                  project.coverImage
+                    ? urlFor(project.coverImage).width(800).url()
+                    : "/assets/hero-home.png"
+                }
+                alt={project.title}
+                className="w-full h-full object-cover transition-all duration-[1200ms] hover:scale-[1.05]"
+              />
+            </div>
 
-        <Link
-          href="/work/art/digital-liminality"
-          className="featured-card hover-trigger inline-block align-top w-[480px] max-sm:w-[320px] flex-shrink-0 no-underline text-inherit"
-        >
-          <div className="w-full aspect-[16/10] overflow-hidden border border-white/5 mb-[20px]">
-            <img src="/assets/art-1.png" alt="Digital Liminality Installation" className="w-full h-full object-cover grayscale transition-all duration-[1200ms] hover:scale-[1.05] hover:grayscale-0" />
+            <div className="flex justify-between items-baseline border-b border-border-muted pb-[12px] mb-[10px]">
+              <span className="font-display text-[0.65rem] font-bold tracking-[0.1em] uppercase text-fg-secondary">
+                {project.type}
+              </span>
+
+              <span className="font-sans text-[0.75rem] text-fg-muted">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+
+            <h4 className="font-serif text-[1.8rem] font-light leading-[1.2]">
+              {project.title}
+            </h4>
+          </Link>
+          ))
+        ) : (
+          <div className="flex items-center justify-center min-w-[400px]">
+            <p className="text-fg-muted font-sans">
+              No projects found.
+            </p>
           </div>
-          <div className="flex justify-between items-baseline border-b border-border-muted pb-[12px] mb-[10px]">
-            <span className="font-display text-[0.65rem] font-bold tracking-[0.1em] uppercase text-fg-secondary">ART ARCHIVE</span>
-            <span className="font-sans text-[0.75rem] text-fg-muted">02 / 02</span>
-          </div>
-          <h4 className="font-serif text-[1.8rem] font-light leading-[1.2]">Digital Liminality (Barbican)</h4>
-        </Link>
+        )}
+
       </div>
     </section>
+
   );
 }

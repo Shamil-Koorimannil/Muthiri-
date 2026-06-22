@@ -4,7 +4,7 @@
   --color-bg-primary: #080808;
   --color-bg-secondary: #121212;
   --color-bg-tertiary: #1a1a18;
-  --color-fg-primary: #f4f4f0;
+  --color-fg-primary: #ffffff;
   --color-fg-secondary: #a3a39e;
   --color-fg-muted: #5e5e5a;
   --color-accent: #d4af37;
@@ -24,17 +24,29 @@
 }
 
 @keyframes soundPulse {
-  0% { transform: scaleY(0.2); }
-  100% { transform: scaleY(1); }
+  0% {
+    transform: scaleY(0.2);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
   background-color: #080808;
   color: #f4f4f0;
   font-family: var(--font-sans);
@@ -46,7 +58,14 @@ html, body {
 }
 
 @media (pointer: fine) {
-  body, a, button, select, input, textarea, .hover-trigger {
+
+  body:not(.studio-mode),
+  body:not(.studio-mode) a,
+  body:not(.studio-mode) button,
+  body:not(.studio-mode) select,
+  body:not(.studio-mode) input,
+  body:not(.studio-mode) textarea,
+  body:not(.studio-mode) .hover-trigger {
     cursor: none !important;
   }
 }
@@ -55,13 +74,16 @@ html, body {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: #080808;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #242422;
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #5e5e5a;
 }
@@ -117,20 +139,24 @@ body.cursor-hover .cursor-dot {
   height: 12px;
   background-color: #fff;
 }
+
 body.cursor-hover .cursor-ring {
   width: 56px;
   height: 56px;
   border-color: rgba(255, 255, 255, 0.8);
 }
+
 body.cursor-view-project .cursor-dot {
   opacity: 0;
 }
+
 body.cursor-view-project .cursor-ring {
   width: 90px;
   height: 90px;
   background-color: rgba(244, 244, 240, 0.95);
   border-color: transparent;
 }
+
 body.cursor-view-project::after {
   content: 'VIEW';
   position: fixed;
@@ -150,11 +176,13 @@ body.cursor-view-project::after {
   overflow: hidden;
   display: block;
 }
+
 .reveal-text {
   display: block;
   transform: translateY(105%);
   transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
 }
+
 .reveal-text.active {
   transform: translateY(0);
 }
@@ -164,6 +192,7 @@ body.cursor-view-project::after {
   transform: translateY(20px);
   transition: opacity 1s cubic-bezier(0.76, 0, 0.24, 1), transform 1s cubic-bezier(0.76, 0, 0.24, 1);
 }
+
 .fade-in.active {
   opacity: 1;
   transform: translateY(0);
@@ -180,6 +209,7 @@ body.cursor-view-project::after {
   transform-origin: top;
   transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
 }
+
 .curtain-logo {
   font-family: var(--font-display);
   font-size: 2vw;
@@ -191,18 +221,22 @@ body.cursor-view-project::after {
   transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
 }
+
 .curtain.active .curtain-panel {
   transform: scaleY(1);
 }
+
 .curtain.active .curtain-logo {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.3s;
 }
+
 .curtain.exit .curtain-panel {
   transform-origin: bottom;
   transform: scaleY(0);
 }
+
 .curtain.exit .curtain-logo {
   opacity: 0;
   transform: translateY(-20px);
@@ -216,6 +250,7 @@ body.cursor-view-project::after {
   height: 10px;
   width: 12px;
 }
+
 .sound-wave .bar:nth-child(1) {
   width: 2px;
   background-color: currentColor;
@@ -223,6 +258,7 @@ body.cursor-view-project::after {
   transform-origin: bottom;
   transform: scaleY(0.3);
 }
+
 .sound-wave .bar:nth-child(2) {
   width: 2px;
   background-color: currentColor;
@@ -230,6 +266,7 @@ body.cursor-view-project::after {
   transform-origin: bottom;
   transform: scaleY(0.3);
 }
+
 .sound-wave .bar:nth-child(3) {
   width: 2px;
   background-color: currentColor;
@@ -237,20 +274,41 @@ body.cursor-view-project::after {
   transform-origin: bottom;
   transform: scaleY(0.3);
 }
+
 .sound-playing .bar:nth-child(1) {
   animation: soundPulse 1.2s ease-in-out infinite alternate;
 }
+
 .sound-playing .bar:nth-child(2) {
   animation: soundPulse 1.2s ease-in-out infinite alternate;
   animation-delay: 0.2s;
 }
+
 .sound-playing .bar:nth-child(3) {
   animation: soundPulse 1.2s ease-in-out infinite alternate;
   animation-delay: 0.4s;
+}
+
+.archive-toggle {
+  display: flex;
+  position: relative;
+  background: rgba(20, 20, 20, .4);
+  border: 1px solid #242422;
+  padding: 4px;
+  border-radius: 40px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 @media screen and (max-width: 768px) {
   #custom-cursor {
     display: none !important;
   }
+
+}
+
+body.studio-mode,
+body.studio-mode * {
+  cursor: auto !important;
 }

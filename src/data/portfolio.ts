@@ -64,27 +64,15 @@ export interface Footnote {
   refId: string;
 }
 
-export interface Dissertation {
+export interface Blog {
   title: string;
   subtitle: string;
   teaser: string;
-  author: string;
-  citation: string;
   chapters: Chapter[];
-  footnotes: Footnote[];
-}
-
-export interface Publication {
-  id: string;
-  title: string;
-  journal: string;
-  year: string;
-  summary: string;
 }
 
 export interface Writing {
-  dissertation: Dissertation;
-  publications: Publication[];
+  blogs: Blog;
 }
 
 export const portfolioDB = {
@@ -191,19 +179,17 @@ export const portfolioDB = {
     representedBy: "Art & Archives Ltd"
   },
   writing: {
-    dissertation: {
+    blogs: {
       title: "The Architecture of Absence",
       subtitle: "Spatial Void as Creative Medium in Contemporary Art and Digital Aesthetics",
       teaser: "A comprehensive inquiry into Japanese negative space, mid-century musical silence, and how negative layouts act as an antidote to algorithmic attention tracking on the modern web.",
-      author: "Muthiri",
-      citation: "Muthiri. (2025). The Architecture of Absence: Spatial Void as Creative Medium. London: Royal College of Art Press.",
       chapters: [
         {
           id: "chapter-1",
           num: "Chapter I",
           title: "Introduction: Defining the Void",
           content: `
-            <p>In the contemporary digital landscape, space is rarely empty. Every pixel is occupied, every scroll is tracked, and every second of attention is commodified. This thesis investigates the conceptual and spatial 'void' not as a lack of content, but as a deliberate creative medium<a href="#fn-1" class="citation-ref" id="fn-ref-1">1</a>.</p>
+            <p>In the contemporary digital landscape, space is rarely empty. Every pixel is occupied, every scroll is tracked, and every second of attention is commodified. This thesis investigates the conceptual and spatial 'void' not as a lack of content, but as a deliberate creative medium.</p>
             <p>From the architectural concept of Japanese <em>Ma</em> (間)—which translates to 'negative space' or 'the silence between notes'—to the minimal soundscapes of John Cage, emptiness has long functioned as a structural container. This chapter establishes a theoretical framework that connects physical minimalist sculpture with emerging digital structures of silence.</p>
             <blockquote>
               "Empty space is not an absence. It is a presence that demands observation, a clearing in which thought can finally crystallize."
@@ -216,31 +202,11 @@ export const portfolioDB = {
           num: "Chapter II",
           title: "Brutalist Webs & Digital Deserts",
           content: `
-            <p>Web interfaces have evolved into uniform, highly optimized marketing machines. The 'SaaS landing page' archetype has stripped the digital environment of its experimental culture<a href="#fn-2" class="citation-ref" id="fn-ref-2">2</a>. This chapter analyses 'brutalist websites' and 'digital deserts'—spaces on the internet designed with zero user tracking, extreme layouts, and deliberate whitespace.</p>
+            <p>Web interfaces have evolved into uniform, highly optimized marketing machines. The 'SaaS landing page' archetype has stripped the digital environment of its experimental culture. This chapter analyses 'brutalist websites' and 'digital deserts'—spaces on the internet designed with zero user tracking, extreme layouts, and deliberate whitespace.</p>
             <p>Through visual analysis of net-art archives, we demonstrate how these digital deserts evoke feelings akin to standing inside an empty concrete gallery. They reject the commodified UX patterns in favor of visual friction, raw HTML structure, and intellectual distance.</p>
           `
         }
-      ],
-      footnotes: [
-        { id: "fn-1", label: "1. Muthiri. Spatial Voids and Digital Overload, pp. 45-48. London Art Press, 2024.", refId: "fn-ref-1" },
-        { id: "fn-2", label: "2. Sagmeister, Stefan. Beauty and the Bauhaus Archive, p. 112. Phaidon Press, 2019.", refId: "fn-ref-2" }
       ]
-    },
-    publications: [
-      {
-        id: "aesthetic-noise",
-        title: "Aesthetic Noise: Glitch as Digital Craftsmanship",
-        journal: "Journal of Contemporary Media Studies, Vol. 12",
-        year: "2025",
-        summary: "An analysis of intentional visual noise, film grain, and glitch artifacts in digital spaces as a search for organic tactile experience in flat, vector-based screen designs."
-      },
-      {
-        id: "typographic-silence",
-        title: "Typographic Silence: Negative Space in Editorial Font Systems",
-        journal: "Design Monograph Series, Tate Press",
-        year: "2024",
-        summary: "A study on negative leading and spatial kerning in the works of Alex Trochut and contemporary fashion campaigns, formulating a grammar for silent typography."
-      }
-    ]
+    }
   }
 } as const;
