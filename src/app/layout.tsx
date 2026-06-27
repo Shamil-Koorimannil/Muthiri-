@@ -29,9 +29,9 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Muthiri — Portfolio & Archive",
+  title: "Noufan Muthiri — Portfolio & Archive",
   description:
-    "Digital monograph, conceptual archive, and academic publication platform of Muthiri, multidisciplinary designer, artist, and researcher.",
+    "Official portfolio and archive of Noufan Muthiri, visualization faculty, digital artist, creative educator, and entrepreneur from Kerala, India.",
 };
 
 export default function RootLayout({

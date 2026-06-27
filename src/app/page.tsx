@@ -13,7 +13,8 @@ type Project = {
   coverImage?: any;
 };
 export default async function HomePage() {
-  const projects: Project[] = await client.fetch(projectsQuery);
+  // const projects: Project[] = await client.fetch(projectsQuery);
+  const projects: Project[] = [];
   return (
 
     <section className="flex flex-col justify-center min-h-screen pt-[180px] pb-[100px]" style={{ paddingLeft: "var(--site-padding-x)", paddingRight: "var(--site-padding-x)" }}>
@@ -21,19 +22,19 @@ export default async function HomePage() {
         <div className="flex flex-col">
           <span className="reveal-wrapper block overflow-hidden">
             <span className="reveal-text font-sans text-[0.85rem] font-normal tracking-[0.25em] text-fg-secondary uppercase mb-[25px] block">
-              London / Berlin &mdash; Est. 2020
+              Kerala, India &mdash; Est. 2018
             </span>
           </span>
           <h1 className="reveal-wrapper block overflow-hidden">
             <span className="reveal-text font-serif text-[5.5vw] max-md:text-[9vw] max-sm:text-[11vw] font-light leading-[0.95] tracking-[-0.03em] text-fg-primary">
-              Muthiri is a <em className="font-serif italic font-light">multidisciplinary</em> creative designing physical archives &amp; generative art.
+              Noufan Muthiri is a <em className="font-serif italic font-light">digital artist</em> &amp; creative educator reinterpreting culture and mysticism.
             </span>
           </h1>
         </div>
         <div className="fade-in relative w-full aspect-[4/5] overflow-hidden border border-white/5">
           <img
             src="/assets/hero-home.png"
-            alt="Muthiri Art Installation"
+            alt="Noufan Muthiri Art Installation"
             className="hero-image w-full h-full object-cover grayscale contrast-[105%] scale-[1.15]"
           />
         </div>
@@ -41,11 +42,11 @@ export default async function HomePage() {
 
       <div className="grid grid-cols-1 md:grid-cols-[0.7fr_1.3fr] gap-[8vw] items-start mb-[18vh] border-t border-border-color pt-[8vh] fade-in">
         <div className="font-display text-[2.2vw] max-md:text-[1.8rem] font-bold leading-[1.1] tracking-[-0.02em]">
-          THE ART OF NEGATIVE SPACE.
+          POETIC VISUAL NARRATION.
         </div>
         <div className="flex flex-col gap-[40px]">
           <p className="text-[1.25rem] font-light text-fg-secondary max-w-[700px] leading-[1.6]">
-            Bridging the gap between strict rational brand systems, digital spatial design, and conceptual art. Working with leading museums and luxury publications to construct visual monuments of silence.
+            Exploring Mappila culture, Sufi mysticism, and contemporary digital media. Mentoring aspiring artists and providing creative solutions through Muthiri Creative School and Consultancy.
           </p>
           <Link
             href="/about"
@@ -104,9 +105,9 @@ export default async function HomePage() {
           </Link>
           ))
         ) : (
-          <div className="flex items-center justify-center min-w-[400px]">
-            <p className="text-fg-muted font-sans">
-              No projects found.
+          <div className="flex items-center justify-center min-w-[400px] border border-dashed border-white/10 rounded-[8px] p-12">
+            <p className="text-fg-muted font-sans text-sm tracking-[0.1em] uppercase">
+              Selected works are being archived.
             </p>
           </div>
         )}

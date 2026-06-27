@@ -15,12 +15,12 @@ export default function AboutPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-[8vw] items-start mb-[15vh]">
           <div className="w-full aspect-[4/5] overflow-hidden border border-border-color fade-in">
-            <img src="/assets/about-portrait.png" alt="Muthiri portrait" className="w-full h-full object-cover grayscale" />
+            <img src="/assets/Noufan muthiri.webp" alt="Noufan Muthiri portrait" className="w-full h-full object-cover grayscale" />
           </div>
           <div className="flex flex-col gap-[40px]">
             <h1 className="reveal-wrapper block overflow-hidden">
               <span className="reveal-text font-serif text-[4vw] max-md:text-[2rem] font-light leading-[1.1]">
-                ABOUT THE PRACTICE
+                ABOUT NOUFAN MUTHIRI
               </span>
             </h1>
             <div className="font-sans text-[1.15rem] leading-[1.7] text-fg-secondary [&_p]:mb-[25px] fade-in">

@@ -162,21 +162,24 @@ export const portfolioDB = {
   about: {
     bio: {
       paragraphs: [
-        "Muthiri (b. 1996) is a designer, digital media artist, and design theorist working at the intersection of print monographs, software art, and academic research. She holds an MA with Distinction in Visual Communication from the Royal College of Art, London.",
-        "Her practice critiques our hyper-accelerated digital landscape. Using the medium of the 'void'—empty pages, dark code, low auditory frequencies, and brutalist layouts—she constructs monuments of structural silence. She consults with global cultural institutions, design agencies, and publication firms who seek to design meaningful archival artifacts."
+        "Noufan Muthiri is a Visualization Faculty, digital artist, creative educator, and entrepreneur from Kerala, India. He is the Founder of Muthiri Creative School and Muthiri Creative Consultancy, where he mentors aspiring artists, designers, and creative professionals while providing creative direction, branding, and visual communication solutions.",
+        "With 8 years of teaching experience in art and design, and a Bachelor of Fine Arts (BFA) and Master of Fine Arts (MFA) in Applied Art, Noufan has dedicated his career to nurturing creativity, critical thinking, and professional excellence. His artistic practice is deeply rooted in the cultural landscape of the Malabar Mappila Muslim community, exploring Mappila culture, Sufi mysticism, and poetic visual narration through contemporary digital media. His research-driven works reinterpret themes of identity, migration, spirituality, memory, and cultural transformation.",
+        "His artworks have been selected for the 52nd Kerala Government State Exhibition of Art, the National Art Camp (Akhi Camp), and the First International Kala Mela, Delhi. His new media digital artworks have also been featured at the NNC Art Gallery, London, reflecting his growing contribution to contemporary art and visual storytelling."
       ]
     },
     cv: [
-      { year: "2026", title: "Digital Liminality (Solo Exhibition)", desc: "Curated projection sculpture installations examining mathematical voids.", loc: "Barbican, London" },
-      { year: "2025", title: "MA in Visual Communication", desc: "Royal College of Art, London — Thesis on Spatial Negative Voids.", loc: "RCA, London" },
-      { year: "2025", title: "Shadow Architectures (Group Show)", desc: "Exhibition exploring structural cast shadows on raw concrete blocks.", loc: "König Galerie, Tokyo" },
-      { year: "2024", title: "Tate Generative Brand Co-Lab", desc: "Variable typographic system adapting dynamically to visitor traffic.", loc: "Tate Modern, London" }
+      { year: "Featured", title: "NNC Art Gallery, London", desc: "New media digital artworks featured in contemporary art showcase.", loc: "London, UK" },
+      { year: "Selected", title: "52nd Kerala Government State Exhibition of Art", desc: "Selected for state level exhibition of art.", loc: "Kerala, India" },
+      { year: "Selected", title: "National Art Camp (Akhi Camp)", desc: "Selected and participated in Akhi Camp.", loc: "India" },
+      { year: "Selected", title: "First International Kala Mela", desc: "Selected for international art showcase.", loc: "Delhi, India" },
+      { year: "Degree", title: "Master of Fine Arts (MFA)", desc: "MFA in Applied Art.", loc: "India" },
+      { year: "Degree", title: "Bachelor of Fine Arts (BFA)", desc: "BFA in Applied Art.", loc: "India" }
     ]
   },
   contact: {
-    email: "studio@muthiri.com",
-    location: "London / Berlin",
-    representedBy: "Art & Archives Ltd"
+    email: "info@muthiri.com",
+    location: "Kerala, India",
+    representedBy: "Muthiri Creative Consultancy"
   },
   writing: {
     blogs: {

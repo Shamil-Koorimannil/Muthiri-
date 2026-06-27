@@ -13,9 +13,9 @@ export default function BlogsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await client.fetch(blogsQuery);
-        console.log("Blog:", data);
-        setDoc(data);
+        // const data = await client.fetch(blogsQuery);
+        // setDoc(data);
+        setDoc(null);
       } catch (error) {
         console.error(error);
       }
@@ -57,8 +57,8 @@ export default function BlogsPage() {
 
   if (!doc) {
     return (
-      <section className="pt-[150px] min-h-screen flex items-center justify-center text-white">
-        Loading blog...
+      <section className="pt-[150px] min-h-screen flex items-center justify-center text-white font-sans text-sm tracking-[0.15em] uppercase">
+        Blog content is currently offline for updates.
       </section>
     );
   }

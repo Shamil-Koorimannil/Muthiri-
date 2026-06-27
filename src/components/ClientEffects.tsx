@@ -75,7 +75,7 @@ export function ClientEffects() {
     const copyBtn = document.getElementById("copy-cite");
 
     const docCitation =
-      "Muthiri. (2025). The Architecture of Absence: Spatial Void as Creative Medium. London: Royal College of Art Press.";
+      "Muthiri, N. (2026). Visual Communication & Creative Direction. Kerala: Muthiri Creative Consultancy.";
 
     const handleCopy = () => {
       navigator.clipboard.writeText(docCitation);

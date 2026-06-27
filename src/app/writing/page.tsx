@@ -6,13 +6,34 @@ import {
 import { urlFor } from "@/sanity/lib/image";
 
 export default async function WritingPage() {
-  const blogs = await client.fetch(blogsQuery);
+  // const blogs = await client.fetch(blogsQuery);
+  const blogs = null as any;
 
   if (!blogs) {
     return (
-      <section className="pt-[180px] min-h-screen">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h1>No blogs found.</h1>
+      <section
+        className="pb-[140px] min-h-screen"
+        style={{
+          paddingTop: "180px",
+          paddingLeft: "var(--site-padding-x)",
+          paddingRight: "var(--site-padding-x)",
+        }}
+      >
+        <div className="max-w-[1200px] mx-auto">
+          {/* Hero */}
+          <div className="border-b border-border-color pb-[8vh] mb-[12vh]">
+            <h1 className="reveal-wrapper block overflow-hidden">
+              <span className="reveal-text font-serif text-[5rem] max-sm:text-[3rem] font-light leading-[1]">
+                WRITING &amp; RESEARCH
+              </span>
+            </h1>
+          </div>
+
+          <div className="fade-in py-[12vh] border border-dashed border-white/10 flex items-center justify-center rounded-[8px]">
+            <p className="font-sans text-[0.9rem] tracking-[0.15em] text-fg-secondary uppercase">
+              Writing archive is currently being updated.
+            </p>
+          </div>
         </div>
       </section>
     );
