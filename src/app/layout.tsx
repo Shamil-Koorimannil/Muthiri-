@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Syne } from "next/font/google";
+import { Cormorant_Garamond, Inter, Syne, Poppins } from "next/font/google";
 import { NoiseOverlay } from "@/components/NoiseOverlay";
 import { CustomCursor } from "@/components/CustomCursor";
 import { TransitionCurtain } from "@/components/TransitionCurtain";
@@ -28,6 +28,13 @@ const syne = Syne({
   display: "swap",
 });
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Muthiri — Portfolio & Archive",
   description:
@@ -42,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${inter.variable} ${syne.variable}`}
+      className={`${cormorant.variable} ${inter.variable} ${syne.variable} ${poppins.variable}`}
     >
       <body>
         <NoiseOverlay />

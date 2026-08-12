@@ -36,7 +36,12 @@ export default function ContactPage() {
   }, []);
 
   return (
-    <section className="pt-[180px] pb-[100px] min-h-screen flex flex-col justify-center" style={{ paddingLeft: "var(--site-padding-x)", paddingRight: "var(--site-padding-x)" }}>
+    <section className="pt-[180px] pb-[100px] min-h-screen flex flex-col justify-center"
+      style={{
+
+        paddingLeft: "var(--site-padding-x)",
+        paddingRight: "var(--site-padding-x)"
+      }}>
       <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-[8vw]">
         <div className="flex flex-col justify-between fade-in">
           <div>
@@ -76,58 +81,63 @@ export default function ContactPage() {
         </div>
 
         <div className="bg-bg-secondary border border-border-color p-[50px] max-sm:p-[30px_20px] fade-in">
-          <form className="contact-form flex flex-col gap-[40px]">
-            <div className="flex flex-col relative">
-              <input
-                type="text"
-                id="form-name"
-                className="peer hover-trigger bg-transparent border-none border-b border-border-color text-fg-primary font-sans text-[1rem] py-[10px] outline-none transition-colors duration-[400ms] focus:border-b-fg-primary"
-                placeholder=" "
-                required
-                autoComplete="off"
-              />
-              <label
-                htmlFor="form-name"
-                className="absolute top-[10px] left-0 font-sans text-[0.9rem] text-fg-secondary pointer-events-none transition-all duration-[400ms] peer-focus:-translate-y-[25px] peer-focus:text-[0.65rem] peer-focus:text-fg-muted peer-focus:tracking-[0.1em] peer-focus:uppercase peer-[:not(:placeholder-shown)]:-translate-y-[25px] peer-[:not(:placeholder-shown)]:text-[0.65rem] peer-[:not(:placeholder-shown)]:text-fg-muted peer-[:not(:placeholder-shown)]:tracking-[0.1em] peer-[:not(:placeholder-shown)]:uppercase"
-                style={{ transitionTimingFunction: "var(--transition-smooth)" }}
-              >
-                YOUR NAME
-              </label>
-            </div>
-            <div className="flex flex-col relative">
-              <input
-                type="email"
-                id="form-email"
-                className="peer hover-trigger bg-transparent border-none border-b border-border-color text-fg-primary font-sans text-[1rem] py-[10px] outline-none transition-colors duration-[400ms] focus:border-b-fg-primary"
-                placeholder=" "
-                required
-                autoComplete="off"
-              />
-              <label
-                htmlFor="form-email"
-                className="absolute top-[10px] left-0 font-sans text-[0.9rem] text-fg-secondary pointer-events-none transition-all duration-[400ms] peer-focus:-translate-y-[25px] peer-focus:text-[0.65rem] peer-focus:text-fg-muted peer-focus:tracking-[0.1em] peer-focus:uppercase peer-[:not(:placeholder-shown)]:-translate-y-[25px] peer-[:not(:placeholder-shown)]:text-[0.65rem] peer-[:not(:placeholder-shown)]:text-fg-muted peer-[:not(:placeholder-shown)]:tracking-[0.1em] peer-[:not(:placeholder-shown)]:uppercase"
-                style={{ transitionTimingFunction: "var(--transition-smooth)" }}
-              >
-                EMAIL ADDRESS
-              </label>
-            </div>
-            <div className="flex flex-col relative">
-              <textarea
-                id="form-message"
-                className="peer hover-trigger bg-transparent border-none border-b border-border-color text-fg-primary font-sans text-[1rem] py-[10px] outline-none transition-colors duration-[400ms] focus:border-b-fg-primary resize-none"
-                rows={4}
-                placeholder=" "
-                required
-              />
-              <label
-                htmlFor="form-message"
-                className="absolute top-[10px] left-0 font-sans text-[0.9rem] text-fg-secondary pointer-events-none transition-all duration-[400ms] peer-focus:-translate-y-[25px] peer-focus:text-[0.65rem] peer-focus:text-fg-muted peer-focus:tracking-[0.1em] peer-focus:uppercase peer-[:not(:placeholder-shown)]:-translate-y-[25px] peer-[:not(:placeholder-shown)]:text-[0.65rem] peer-[:not(:placeholder-shown)]:text-fg-muted peer-[:not(:placeholder-shown)]:tracking-[0.1em] peer-[:not(:placeholder-shown)]:uppercase"
-                style={{ transitionTimingFunction: "var(--transition-smooth)" }}
-              >
-                INQUIRY / CO-LAB PROPOSAL
-              </label>
-            </div>
+          <form
+            className="contact-form flex flex-col gap-[40px] px-[60px]"
+            style={{ marginTop: "40px", marginLeft: "50px" }}
+          >
+            <div className="pt-[10px] pl-[10px] pr-[40px] flex flex-col gap-[40px]">
 
+              <div className="flex flex-col relative">
+                <input
+                  type="text"
+                  id="form-name"
+                  className="peer hover-trigger bg-transparent border-none border-b border-border-color text-fg-primary font-sans text-[1rem] py-[10px] outline-none transition-colors duration-[400ms] focus:border-b-fg-primary"
+                  placeholder=" "
+                  required
+                  autoComplete="off"
+                />
+                <label
+                  htmlFor="form-name"
+                  className="absolute top-[10px] left-0 font-sans text-[0.9rem] text-fg-secondary pointer-events-none transition-all duration-[400ms] peer-focus:-translate-y-[25px] peer-focus:text-[0.65rem] peer-focus:text-fg-muted peer-focus:tracking-[0.1em] peer-focus:uppercase peer-[:not(:placeholder-shown)]:-translate-y-[25px] peer-[:not(:placeholder-shown)]:text-[0.65rem] peer-[:not(:placeholder-shown)]:text-fg-muted peer-[:not(:placeholder-shown)]:tracking-[0.1em] peer-[:not(:placeholder-shown)]:uppercase"
+                  style={{ transitionTimingFunction: "var(--transition-smooth)" }}
+                >
+                  YOUR NAME
+                </label>
+              </div>
+              <div className="flex flex-col relative">
+                <input
+                  type="email"
+                  id="form-email"
+                  className="peer hover-trigger bg-transparent border-none border-b border-border-color text-fg-primary font-sans text-[1rem] py-[10px] outline-none transition-colors duration-[400ms] focus:border-b-fg-primary"
+                  placeholder=" "
+                  required
+                  autoComplete="off"
+                />
+                <label
+                  htmlFor="form-email"
+                  className="absolute top-[10px] left-0 font-sans text-[0.9rem] text-fg-secondary pointer-events-none transition-all duration-[400ms] peer-focus:-translate-y-[25px] peer-focus:text-[0.65rem] peer-focus:text-fg-muted peer-focus:tracking-[0.1em] peer-focus:uppercase peer-[:not(:placeholder-shown)]:-translate-y-[25px] peer-[:not(:placeholder-shown)]:text-[0.65rem] peer-[:not(:placeholder-shown)]:text-fg-muted peer-[:not(:placeholder-shown)]:tracking-[0.1em] peer-[:not(:placeholder-shown)]:uppercase"
+                  style={{ transitionTimingFunction: "var(--transition-smooth)" }}
+                >
+                  EMAIL ADDRESS
+                </label>
+              </div>
+              <div className="flex flex-col relative">
+                <textarea
+                  id="form-message"
+                  className="peer hover-trigger bg-transparent border-none border-b border-border-color text-fg-primary font-sans text-[1rem] py-[10px] outline-none transition-colors duration-[400ms] focus:border-b-fg-primary resize-none"
+                  rows={4}
+                  placeholder=" "
+                  required
+                />
+                <label
+                  htmlFor="form-message"
+                  className="absolute top-[10px] left-0 font-sans text-[0.9rem] text-fg-secondary pointer-events-none transition-all duration-[400ms] peer-focus:-translate-y-[25px] peer-focus:text-[0.65rem] peer-focus:text-fg-muted peer-focus:tracking-[0.1em] peer-focus:uppercase peer-[:not(:placeholder-shown)]:-translate-y-[25px] peer-[:not(:placeholder-shown)]:text-[0.65rem] peer-[:not(:placeholder-shown)]:text-fg-muted peer-[:not(:placeholder-shown)]:tracking-[0.1em] peer-[:not(:placeholder-shown)]:uppercase"
+                  style={{ transitionTimingFunction: "var(--transition-smooth)" }}
+                >
+                  INQUIRY / CO-LAB PROPOSAL
+                </label>
+              </div>
+            </div>
             <button
               type="submit"
               className="submit-btn hover-trigger bg-transparent border border-border-color text-fg-primary px-[32px] py-[16px] font-sans text-[0.8rem] tracking-[0.15em] uppercase font-medium self-start transition-all duration-[400ms] hover:bg-fg-primary hover:text-bg-primary hover:border-fg-primary"

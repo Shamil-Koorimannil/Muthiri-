@@ -4,8 +4,15 @@ export default function AboutPage() {
   const { bio, cv } = portfolioDB.about;
 
   return (
-    <section className="pt-[180px] pb-[100px] min-h-screen" style={{ paddingLeft: "var(--site-padding-x)", paddingRight: "var(--site-padding-x)" }}>
+    <section className=" pb-[100px] min-h-screen"
+      style={{
+        paddingTop: "220px",
+
+        paddingLeft: "var(--site-padding-x)",
+        paddingRight: "var(--site-padding-x)"
+      }}>
       <div>
+
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-[8vw] items-start mb-[15vh]">
           <div className="w-full aspect-[4/5] overflow-hidden border border-border-color fade-in">
             <img src="/assets/about-portrait.png" alt="Muthiri portrait" className="w-full h-full object-cover grayscale" />

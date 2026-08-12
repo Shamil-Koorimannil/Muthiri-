@@ -28,8 +28,8 @@ export function useCursor() {
       x += (targetX - x) * speed;
       y += (targetY - y) * speed;
 
-      dot!.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
-      ring!.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
+      ring.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
       rafRef.current = requestAnimationFrame(animate);
     };
 
