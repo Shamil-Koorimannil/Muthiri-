@@ -11,10 +11,10 @@
   --color-border-color: #242422;
   --color-border-muted: #161615;
 
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', -apple-system, sans-serif;
-  --font-display: 'Syne', sans-serif;
-  --font-poppins: var(--font-poppins), 'Poppins', sans-serif;
+  --font-serif: 'Helvetica', 'Arial', sans-serif;
+  --font-sans: 'Helvetica', 'Arial', sans-serif;
+  --font-display: 'Helvetica', 'Arial', sans-serif;
+  --font-poppins: 'Helvetica', 'Arial', sans-serif;
 }
 
 :root {
@@ -50,8 +50,8 @@ html,
 body {
   background-color: #080808;
   color: #f4f4f0;
-  font-family: var(--font-sans);
-  font-weight: 300;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
