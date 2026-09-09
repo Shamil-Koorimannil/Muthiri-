@@ -19,15 +19,19 @@ type Project = {
 
 export default function WorkArchive({
   projects,
+  illustrations = [],
 }: {
   projects: Project[];
+  illustrations?: string[];
 }) {
   const [tab, setTab] = useState<"all" | "design" | "art">("design");
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>("all");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on click outside or Escape key
+  // Close dropdown or lightbox on click outside / Escape key
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -41,6 +45,7 @@ export default function WorkArchive({
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setDropdownOpen(false);
+        setLightboxImg(null);
       }
     }
 
@@ -79,14 +84,19 @@ export default function WorkArchive({
     return [...defaultSubs, ...extraFormatted];
   }, [projects]);
 
-  // Filter projects based on main tab and subCategory dropdown
+  // Filter Sanity projects based on main tab and subCategory dropdown
   const filteredProjects = useMemo(() => {
     return projects.filter((p) => {
       // Main tab filter
       if (tab === "design" && p.type !== "design") return false;
       if (tab === "art" && p.type !== "art") return false;
 
-      // Secondary Design subcategory filter (only applies when viewing Design or All)
+      // If Illustration is explicitly selected, do not show Sanity Branding/Advertising projects
+      if (selectedSubCategory === "illustration") {
+        return false;
+      }
+
+      // Secondary Design subcategory filter
       if ((tab === "design" || tab === "all") && selectedSubCategory !== "all") {
         if (p.type === "design") {
           if (!p.subCategory) return false;
@@ -107,6 +117,11 @@ export default function WorkArchive({
     );
     return found ? found.label : "All Design";
   }, [availableSubCategories, selectedSubCategory]);
+
+  const showIllustrations =
+    (tab === "design" || tab === "all") &&
+    (selectedSubCategory === "illustration" || selectedSubCategory === "all") &&
+    illustrations.length > 0;
 
   return (
     <section
@@ -334,10 +349,11 @@ export default function WorkArchive({
         )}
       </div>
 
-      {/* Projects Grid */}
+      {/* Main Content Area */}
       <div className="max-w-[1400px] mx-auto">
-        {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[6vw_4vw] fade-in active">
+        {/* ── 1. SANITY PROJECTS GRID ───────────────────────────────────── */}
+        {filteredProjects.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[6vw_4vw] fade-in active mb-16">
             {filteredProjects.map((p, index) => {
               const isPdf = Boolean(p.pdfUrl);
               const detailUrl =
@@ -410,7 +426,65 @@ export default function WorkArchive({
               );
             })}
           </div>
-        ) : (
+        )}
+
+        {/* ── 2. LOCAL ILLUSTRATIONS GALLERY ───────────────────────────── */}
+        {showIllustrations && (
+          <div className="w-full border-t border-white/10 pt-12 my-12">
+            {selectedSubCategory === "all" && (
+              <div className="mb-10">
+                <span className="font-sans text-[0.72rem] tracking-[0.25em] uppercase text-fg-muted block mb-2">
+                  Design Portfolio
+                </span>
+                <h2 className="font-sans text-[2.2rem] font-light text-white uppercase tracking-[-0.02em]">
+                  Illustrations &amp; Visual Works
+                </h2>
+              </div>
+            )}
+
+            {/* Editorial Masonry/Grid of Illustrations (No filenames, No fake metadata) */}
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+              {illustrations.map((imgSrc, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => setLightboxImg(imgSrc)}
+                  className="
+                    break-inside-avoid overflow-hidden bg-[#121212] border border-white/10
+                    rounded-sm group relative cursor-pointer
+                    transition-all duration-500 hover:border-white/30 hover:shadow-2xl
+                  "
+                >
+                  <img
+                    src={imgSrc}
+                    alt="Illustration artwork"
+                    loading="lazy"
+                    className="w-full h-auto object-contain block transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="w-10 h-10 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {filteredProjects.length === 0 && !showIllustrations && (
           <div className="py-[100px] text-center border border-white/5 rounded-2xl bg-black/20">
             <p className="font-sans text-[1.5rem] font-light text-fg-secondary mb-4">
               No {selectedSubCategory !== "all" ? selectedSubCategory : ""}{" "}
@@ -428,6 +502,42 @@ export default function WorkArchive({
           </div>
         )}
       </div>
+
+      {/* ── 3. FULL-SCREEN LIGHTBOX MODAL ────────────────────────────── */}
+      {lightboxImg && (
+        <div
+          className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-12 animate-in fade-in duration-300"
+          onClick={() => setLightboxImg(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxImg(null)}
+            className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-white/20 transition-colors z-10"
+            aria-label="Close image lightbox"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          <img
+            src={lightboxImg}
+            alt="Illustration Artwork"
+            className="max-w-full max-h-[90vh] object-contain rounded-sm shadow-2xl pointer-events-auto"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }
