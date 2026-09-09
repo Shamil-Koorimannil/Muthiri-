@@ -8,5 +8,20 @@ const builder = createImageUrlBuilder({
 });
 
 export function urlFor(source: any) {
-  return builder.image(source);
+  if (!source || (typeof source === "object" && !source.asset)) {
+    return {
+      width: () => ({ url: () => "/assets/hero-home.png" }),
+      height: () => ({ url: () => "/assets/hero-home.png" }),
+      url: () => "/assets/hero-home.png",
+    } as any;
+  }
+  try {
+    return builder.image(source);
+  } catch {
+    return {
+      width: () => ({ url: () => "/assets/hero-home.png" }),
+      height: () => ({ url: () => "/assets/hero-home.png" }),
+      url: () => "/assets/hero-home.png",
+    } as any;
+  }
 }

@@ -222,7 +222,11 @@ export default function WorkArchive({
                                     >
                                         <div className="w-full aspect-[16/11] overflow-hidden bg-bg-secondary border border-border-color mb-[25px] relative">
                                             <img
-                                                src={urlFor(p.coverImage).width(1200).url()}
+                                                src={
+                                                    p.coverImage
+                                                        ? urlFor(p.coverImage).width(1200).url()
+                                                        : "/assets/hero-home.png"
+                                                }
                                                 alt={p.title}
                                                 className="w-full h-full object-cover transition-all duration-[1400ms] group-hover:scale-[1.03]"
                                             />
@@ -289,7 +293,11 @@ export default function WorkArchive({
                             >
                                 <div className="w-full aspect-[4/5] overflow-hidden bg-bg-secondary border border-border-color mb-[30px]">
                                     <img
-                                        src={urlFor(p.coverImage).width(1200).url()}
+                                        src={
+                                            p.coverImage
+                                                ? urlFor(p.coverImage).width(1200).url()
+                                                : "/assets/hero-home.png"
+                                        }
                                         alt={p.title}
                                         className="w-full h-full object-cover transition-all duration-[2000ms] hover:scale-[1.06]"
                                     />
