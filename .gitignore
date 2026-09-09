@@ -13,8 +13,9 @@
 # testing
 /coverage
 
-# next.js
+# next.js & sanity
 /.next/
+/.sanity/
 /out/
 
 # production
