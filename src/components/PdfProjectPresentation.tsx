@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface PdfProjectPresentationProps {
   pdfUrl: string;
@@ -13,54 +13,71 @@ export function PdfProjectPresentation({
 }: PdfProjectPresentationProps) {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pdfDoc, setPdfDoc] = useState<any>(null);
-  const [error, setError] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
 
   useEffect(() => {
     let isCancelled = false;
+    let timeoutId: NodeJS.Timeout;
 
-    async function loadPdf() {
+    async function initAndLoadPdf() {
       try {
-        setIsLoading(true);
-        setError(false);
+        setStatus("loading");
 
-        // Dynamically import pdfjs-dist on client side
+        // 10-second safety timeout to prevent infinite loading state
+        timeoutId = setTimeout(() => {
+          if (!isCancelled && status === "loading") {
+            console.warn("PDF loading timed out, falling back to direct link");
+            setStatus("error");
+          }
+        }, 10000);
+
+        // Dynamically import pdfjs-dist
         const pdfjsLib = await import("pdfjs-dist");
-        
-        // Set worker source
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
-        const loadingTask = pdfjsLib.getDocument({ url: pdfUrl });
+        // Set worker source cleanly
+        if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+        }
+
+        const loadingTask = pdfjsLib.getDocument({
+          url: pdfUrl,
+          withCredentials: false,
+        });
+
         const loadedDoc = await loadingTask.promise;
 
         if (!isCancelled) {
+          clearTimeout(timeoutId);
           setPdfDoc(loadedDoc);
           setNumPages(loadedDoc.numPages);
-          setIsLoading(false);
+          setStatus("loaded");
         }
       } catch (err) {
-        console.error("Failed to load PDF presentation:", err);
+        console.error("Error initializing PDF document:", err);
         if (!isCancelled) {
-          setError(true);
-          setIsLoading(false);
+          clearTimeout(timeoutId);
+          setStatus("error");
         }
       }
     }
 
     if (pdfUrl) {
-      loadPdf();
+      initAndLoadPdf();
+    } else {
+      setStatus("error");
     }
 
     return () => {
       isCancelled = true;
+      if (timeoutId) clearTimeout(timeoutId);
     };
   }, [pdfUrl]);
 
-  if (error) {
+  if (status === "error") {
     return (
-      <div className="w-full max-w-[1000px] mx-auto my-16 p-8 border border-white/10 rounded-2xl bg-black/40 text-center">
-        <p className="font-serif text-[1.4rem] font-light text-fg-secondary mb-4">
-          The PDF presentation for <span className="italic text-white">{title}</span> could not be loaded inline.
+      <div className="w-full max-w-[1000px] mx-auto my-12 p-8 border border-white/15 rounded-2xl bg-black/40 text-center">
+        <p className="font-sans text-[1.2rem] font-light text-fg-secondary mb-4">
+          The PDF case study for <span className="text-white font-medium">{title}</span> could not be loaded inline.
         </p>
         <a
           href={pdfUrl}
@@ -68,21 +85,22 @@ export function PdfProjectPresentation({
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 font-sans text-[0.8rem] uppercase tracking-[0.15em] text-white border-b border-white pb-1 hover:opacity-80 transition-opacity"
         >
-          <span>View Original PDF Presentation &rarr;</span>
+          <span>View / Download Original PDF &rarr;</span>
         </a>
       </div>
     );
   }
 
-  if (isLoading || !numPages || !pdfDoc) {
+  if (status === "loading" || !numPages || !pdfDoc) {
     return (
-      <div className="w-full max-w-[1200px] mx-auto my-12 space-y-8">
+      <div className="w-full max-w-[1200px] mx-auto my-8 space-y-6">
         {[1, 2].map((i) => (
           <div
             key={i}
-            className="w-full aspect-[16/10] bg-[#141414] border border-white/5 rounded-sm animate-pulse flex items-center justify-center"
+            className="w-full aspect-[16/10] bg-[#121212] border border-white/5 rounded-sm animate-pulse flex flex-col items-center justify-center gap-3 p-6"
           >
-            <span className="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-fg-muted">
+            <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+            <span className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-fg-muted">
               Loading Case Study Page 0{i}...
             </span>
           </div>
@@ -92,7 +110,7 @@ export function PdfProjectPresentation({
   }
 
   return (
-    <section className="w-full max-w-[1200px] mx-auto my-12 md:my-20 flex flex-col gap-6 md:gap-10">
+    <section className="w-full max-w-[1200px] mx-auto my-8 md:my-16 flex flex-col gap-6 md:gap-10">
       {Array.from({ length: numPages }, (_, index) => (
         <PdfPageItem
           key={index + 1}
@@ -113,14 +131,19 @@ interface PdfPageItemProps {
   isPriority: boolean;
 }
 
-function PdfPageItem({ pageNumber, pdfDoc, title, isPriority }: PdfPageItemProps) {
+function PdfPageItem({
+  pageNumber,
+  pdfDoc,
+  title,
+  isPriority,
+}: PdfPageItemProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [shouldRender, setShouldRender] = useState<boolean>(isPriority);
-  const [isRendered, setIsRendered] = useState<boolean>(false);
+  const [renderStatus, setRenderStatus] = useState<"idle" | "rendering" | "done" | "error">("idle");
   const [aspectRatio, setAspectRatio] = useState<number>(16 / 10);
 
-  // Intersection observer for lazy rendering
+  // Viewport IntersectionObserver for lazy loading
   useEffect(() => {
     if (isPriority || shouldRender) return;
 
@@ -146,16 +169,16 @@ function PdfPageItem({ pageNumber, pdfDoc, title, isPriority }: PdfPageItemProps
 
   // Render canvas once visible
   useEffect(() => {
-    if (!shouldRender || !pdfDoc || isRendered) return;
+    if (!shouldRender || !pdfDoc || renderStatus === "done" || renderStatus === "rendering") return;
 
     let isCancelled = false;
 
-    async function renderPage() {
+    async function renderPageCanvas() {
       try {
+        setRenderStatus("rendering");
         const page = await pdfDoc.getPage(pageNumber);
         if (isCancelled) return;
 
-        // Get unscaled viewport to calculate aspect ratio
         const unscaledViewport = page.getViewport({ scale: 1.0 });
         const ratio = unscaledViewport.width / unscaledViewport.height;
         setAspectRatio(ratio);
@@ -166,10 +189,10 @@ function PdfPageItem({ pageNumber, pdfDoc, title, isPriority }: PdfPageItemProps
         const context = canvas.getContext("2d");
         if (!context) return;
 
-        // Determine render scale for crisp high-dpi display
+        // Calculate appropriate scale based on container width and device pixel ratio (capped at 2)
         const containerWidth = containerRef.current?.clientWidth || 1200;
-        const dpr = window.devicePixelRatio || 1;
-        const targetScale = (containerWidth / unscaledViewport.width) * Math.min(dpr, 2);
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const targetScale = (containerWidth / unscaledViewport.width) * dpr;
 
         const viewport = page.getViewport({ scale: targetScale });
 
@@ -184,33 +207,36 @@ function PdfPageItem({ pageNumber, pdfDoc, title, isPriority }: PdfPageItemProps
         await page.render(renderContext).promise;
 
         if (!isCancelled) {
-          setIsRendered(true);
+          setRenderStatus("done");
         }
       } catch (err) {
         console.error(`Error rendering page ${pageNumber}:`, err);
+        if (!isCancelled) {
+          setRenderStatus("error");
+        }
       }
     }
 
-    renderPage();
+    renderPageCanvas();
 
     return () => {
       isCancelled = true;
     };
-  }, [shouldRender, pdfDoc, pageNumber, isRendered]);
+  }, [shouldRender, pdfDoc, pageNumber, renderStatus]);
 
   return (
     <div
       ref={containerRef}
-      className="w-full relative overflow-hidden flex flex-col items-center justify-center transition-opacity duration-700"
+      className="w-full relative overflow-hidden flex flex-col items-center justify-center transition-opacity duration-500"
       style={{
-        aspectRatio: isRendered ? undefined : `${aspectRatio}`,
+        aspectRatio: renderStatus === "done" ? undefined : `${aspectRatio}`,
       }}
       aria-label={`${title} - Page ${pageNumber}`}
     >
-      {!isRendered && (
-        <div className="absolute inset-0 bg-[#141414] border border-white/5 rounded-sm animate-pulse flex items-center justify-center">
+      {renderStatus !== "done" && (
+        <div className="absolute inset-0 bg-[#121212] border border-white/5 rounded-sm animate-pulse flex items-center justify-center">
           <span className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-fg-muted">
-            Rendering Page {String(pageNumber).padStart(2, "0")}
+            {renderStatus === "error" ? "Page Render Failed" : `Page ${String(pageNumber).padStart(2, "0")}`}
           </span>
         </div>
       )}
@@ -218,7 +244,7 @@ function PdfPageItem({ pageNumber, pdfDoc, title, isPriority }: PdfPageItemProps
       <canvas
         ref={canvasRef}
         className={`w-full h-auto block select-none object-contain pointer-events-none transition-opacity duration-500 ${
-          isRendered ? "opacity-100" : "opacity-0"
+          renderStatus === "done" ? "opacity-100" : "opacity-0"
         }`}
         style={{
           maxWidth: "100%",
