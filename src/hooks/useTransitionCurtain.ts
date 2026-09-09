@@ -6,10 +6,20 @@ import { usePathname } from "next/navigation";
 export function useTransitionCurtain() {
   const pathname = usePathname();
   const prevPath = useRef(pathname);
-  const [curtainState, setCurtainState] = useState<"enter" | "active" | "exit" | "hidden">("enter");
-  const [isVisible, setIsVisible] = useState(true);
+  const isStudio = pathname?.startsWith("/studio");
+
+  const [curtainState, setCurtainState] = useState<"enter" | "active" | "exit" | "hidden">(
+    isStudio ? "hidden" : "enter"
+  );
+  const [isVisible, setIsVisible] = useState(!isStudio);
 
   useEffect(() => {
+    if (isStudio) {
+      setIsVisible(false);
+      setCurtainState("hidden");
+      return;
+    }
+
     if (curtainState === "enter") {
       requestAnimationFrame(() => {
         setCurtainState("active");
@@ -22,15 +32,25 @@ export function useTransitionCurtain() {
         }, 600);
       });
     }
-  }, [curtainState]);
+  }, [curtainState, isStudio]);
 
   useEffect(() => {
+    if (isStudio) {
+      setIsVisible(false);
+      setCurtainState("hidden");
+      return;
+    }
+
     if (prevPath.current !== pathname) {
       prevPath.current = pathname;
       setIsVisible(true);
       setCurtainState("enter");
     }
-  }, [pathname]);
+  }, [pathname, isStudio]);
+
+  if (isStudio) {
+    return { isVisible: false, curtainState: "hidden" as const };
+  }
 
   return { isVisible, curtainState };
 }
