@@ -25,7 +25,7 @@ export default async function DesignPage({
       <div className="h-[200px]" />
 
       <div
-        className="max-w-[1400px] mx-auto mb-[8vh]"
+        className="max-w-[1400px] mx-auto mt-6 sm:mt-8 md:mt-0 mb-[8vh]"
         style={{
           paddingLeft: "var(--site-padding-x)",
           paddingRight: "var(--site-padding-x)",

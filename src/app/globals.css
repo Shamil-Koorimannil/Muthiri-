@@ -24,6 +24,25 @@
   --site-padding-y: 4vh;
 }
 
+section {
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  section {
+    margin-top: 3.5rem;
+  }
+}
+
+/* Ensure mobile first section inside main container has dedicated top margin clearance for the fixed navbar */
+@media screen and (max-width: 768px) {
+  main > section:first-of-type,
+  main > div > section:first-of-type,
+  div > section:first-of-type {
+    margin-top: 5.5rem !important;
+  }
+}
+
 @keyframes soundPulse {
   0% {
     transform: scaleY(0.2);
@@ -290,23 +309,17 @@ body.cursor-view-project::after {
   animation-delay: 0.4s;
 }
 
-.archive-toggle {
-  display: flex;
-  position: relative;
-  background: rgba(20, 20, 20, .4);
-  border: 1px solid #242422;
-  padding: 4px;
-  border-radius: 40px;
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
 
-@media screen and (max-width: 768px) {
-  #custom-cursor {
+@media screen and (max-width: 768px), (hover: none) {
+  #custom-cursor,
+  .cursor-dot,
+  .cursor-ring,
+  body.cursor-view-project::after {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
   }
-
 }
 
 body.studio-mode,

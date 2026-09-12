@@ -37,10 +37,12 @@ export function useCursor() {
       const trigger = (e.target as HTMLElement).closest(".hover-trigger, a, button");
       if (trigger) {
         document.body.classList.add("cursor-hover");
+        // Only show "VIEW" badge cursor effect on desktop screens
         if (
-          trigger.classList.contains("featured-card") ||
-          trigger.classList.contains("design-project-item") ||
-          trigger.classList.contains("art-project-item")
+          window.innerWidth > 768 &&
+          (trigger.classList.contains("featured-card") ||
+            trigger.classList.contains("design-project-item") ||
+            trigger.classList.contains("art-project-item"))
         ) {
           document.body.classList.add("cursor-view-project");
         }

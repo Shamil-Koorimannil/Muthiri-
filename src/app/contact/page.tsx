@@ -36,13 +36,13 @@ export default function ContactPage() {
   }, []);
 
   return (
-    <section className="pt-[180px] pb-[100px] min-h-screen flex flex-col justify-center"
+    <section className="pt-[210px] md:pt-[180px] pb-[100px] min-h-screen flex flex-col justify-center"
       style={{
 
         paddingLeft: "var(--site-padding-x)",
         paddingRight: "var(--site-padding-x)"
       }}>
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-[8vw]">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-[8vw] mt-10 sm:mt-12 md:mt-0">
         <div className="flex flex-col justify-between fade-in">
           <div>
             <h1 className="font-serif text-[4.5rem] max-sm:text-[3rem] font-light leading-[1.05] mb-[30px]">
@@ -61,14 +61,7 @@ export default function ContactPage() {
                 {email}
               </a>
             </div>
-            <div>
-              <span className="font-sans text-[0.65rem] tracking-[0.2em] uppercase text-fg-muted block mb-[8px]">
-                LOCATION
-              </span>
-              <span className="font-serif text-[1.8rem] max-sm:text-[1.3rem] text-fg-primary">
-                {location}
-              </span>
-            </div>
+            {/* LOCATION temporarily removed */}
             <div>
               <span className="font-sans text-[0.65rem] tracking-[0.2em] uppercase text-fg-muted block mb-[8px]">
                 REPRESENTED BY

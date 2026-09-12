@@ -28,7 +28,7 @@ export default async function ArtDetailPage({
 
       {/* Title */}
       <div
-        className="max-w-[1400px] mx-auto mb-[100px]"
+        className="max-w-[1400px] mx-auto mt-6 sm:mt-8 md:mt-0 mb-[100px]"
         style={{
           paddingLeft: "var(--site-padding-x)",
           paddingRight: "var(--site-padding-x)",

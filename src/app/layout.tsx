@@ -4,6 +4,7 @@ import { NoiseOverlay } from "@/components/NoiseOverlay";
 import { CustomCursor } from "@/components/CustomCursor";
 import { TransitionCurtain } from "@/components/TransitionCurtain";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { ClientEffects } from "@/components/ClientEffects";
 import "./globals.css";
 
@@ -57,6 +58,7 @@ export default function RootLayout({
         <TransitionCurtain />
         <Header />
         <main id="app-content">{children}</main>
+        <Footer />
         <ClientEffects />
       </body>
     </html>

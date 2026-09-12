@@ -1,30 +1,30 @@
 "use client";
-import { urlFor } from "@/sanity/lib/image";
 import { useEffect, useState } from "react";
 import { PortableText } from "@portabletext/react";
-
 import { client } from "@/sanity/lib/client";
 import { blogsQuery } from "@/sanity/lib/queries";
+import { portfolioDB } from "@/data/portfolio";
 
 export default function BlogsPage() {
-  const [doc, setDoc] = useState<any>(null);
+  const [doc, setDoc] = useState<any>(portfolioDB.writing.blogs);
   const [activeChapter, setActiveChapter] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await client.fetch(blogsQuery);
-        console.log("Blog:", data);
-        setDoc(data);
+        if (data && data.title && data.title !== "The Architecture of Absence") {
+          setDoc(data);
+        } else {
+          setDoc(portfolioDB.writing.blogs);
+        }
       } catch (error) {
-        console.error(error);
+        setDoc(portfolioDB.writing.blogs);
       }
     };
 
     fetchData();
   }, []);
-
-
 
   useEffect(() => {
     if (!doc?.chapters) return;
@@ -86,10 +86,11 @@ export default function BlogsPage() {
                 <li key={chapter._key || chapterId}>
                   <a
                     href={`#${chapterId}`}
-                    className={`text-sm transition-colors ${activeChapter === chapterId
-                      ? "text-white font-medium"
-                      : "text-gray-400 hover:text-white"
-                      }`}
+                    className={`text-sm transition-colors ${
+                      activeChapter === chapterId
+                        ? "text-white font-medium"
+                        : "text-gray-400 hover:text-white"
+                    }`}
                   >
                     {chapter.num} — {chapter.title}
                   </a>
@@ -124,8 +125,14 @@ export default function BlogsPage() {
                     {chapter.num}: {chapter.title}
                   </h3>
 
-                  <div className="prose prose-invert max-w-none">
-                    <PortableText value={chapter.content} />
+                  <div className="prose prose-invert max-w-none text-fg-secondary font-sans leading-[1.8] [&_p]:mb-4 [&_blockquote]:italic [&_blockquote]:border-l-2 [&_blockquote]:border-white/30 [&_blockquote]:pl-4 [&_blockquote]:my-4">
+                    {typeof chapter.content === "string" ? (
+                      <div
+                        dangerouslySetInnerHTML={{ __html: chapter.content }}
+                      />
+                    ) : (
+                      <PortableText value={chapter.content} />
+                    )}
                   </div>
                 </section>
               );

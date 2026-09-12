@@ -81,16 +81,11 @@ export const portfolioDB = {
   about: {
     bio: {
       paragraphs: [
-        "Muthiri (b. 1996) is a designer, digital media artist, and design theorist working at the intersection of print monographs, software art, and academic research. She holds an MA with Distinction in Visual Communication from the Royal College of Art, London.",
-        "Her practice critiques our hyper-accelerated digital landscape. Using the medium of the 'void'—empty pages, dark code, low auditory frequencies, and brutalist layouts—she constructs monuments of structural silence. She consults with global cultural institutions, design agencies, and publication firms who seek to design meaningful archival artifacts."
+        "Noufan Muthiri is a Visualization Faculty, digital artist, creative educator, and entrepreneur from Kerala, India. He is the Founder of Muthiri Creative School and Muthiri Creative Consultancy, where he mentors aspiring artists, designers, and creative professionals while providing creative direction, branding, and visual communication solutions.",
+        "With 8 years of teaching experience in art and design, and a Bachelor of Fine Arts (BFA) and Master of Fine Arts (MFA) in Applied Art, Noufan has dedicated his career to nurturing creativity, critical thinking, and professional excellence. His artistic practice is deeply rooted in the cultural landscape of the Malabar Mappila Muslim community, exploring Mappila culture, Sufi mysticism, and poetic visual narration through contemporary digital media. His research-driven works reinterpret themes of identity, migration, spirituality, memory, and cultural transformation.",
+        "His artworks have been selected for the 52nd Kerala Government State Exhibition of Art, the National Art Camp (Akhi Camp), and the First International Kala Mela, Delhi. His new media digital artworks have also been featured at the NNC Art Gallery, London, reflecting his growing contribution to contemporary art and visual storytelling."
       ]
-    },
-    cv: [
-      { year: "2026", title: "Digital Liminality (Solo Exhibition)", desc: "Curated projection sculpture installations examining mathematical voids.", loc: "Barbican, London" },
-      { year: "2025", title: "MA in Visual Communication", desc: "Royal College of Art, London — Thesis on Spatial Negative Voids.", loc: "RCA, London" },
-      { year: "2025", title: "Shadow Architectures (Group Show)", desc: "Exhibition exploring structural cast shadows on raw concrete blocks.", loc: "König Galerie, Tokyo" },
-      { year: "2024", title: "Tate Generative Brand Co-Lab", desc: "Variable typographic system adapting dynamically to visitor traffic.", loc: "Tate Modern, London" }
-    ]
+    }
   },
   contact: {
     email: "studio@muthiri.com",
@@ -99,30 +94,38 @@ export const portfolioDB = {
   },
   writing: {
     blogs: {
-      title: "The Architecture of Absence",
-      subtitle: "Spatial Void as Creative Medium in Contemporary Art and Digital Aesthetics",
-      teaser: "A comprehensive inquiry into Japanese negative space, mid-century musical silence, and how negative layouts act as an antidote to algorithmic attention tracking on the modern web.",
+      title: "About Noufan Muthiri: Art, Identity & Spatial Narrative",
+      subtitle: "A Reflective Monograph on Sufi Mysticism, Digital Storytelling, and 8 Years of Art Education",
+      teaser: "An in-depth inquiry into Noufan Muthiri's artistic practice, exploring how Malabar Mappila culture, Sufi mysticism, and visual education intersect with contemporary digital media and spatial design.",
       chapters: [
         {
           id: "chapter-1",
           num: "Chapter I",
-          title: "Introduction: Defining the Void",
+          title: "Introduction: Education & Creative Practice",
           content: `
-            <p>In the contemporary digital landscape, space is rarely empty. Every pixel is occupied, every scroll is tracked, and every second of attention is commodified. This thesis investigates the conceptual and spatial 'void' not as a lack of content, but as a deliberate creative medium.</p>
-            <p>From the architectural concept of Japanese <em>Ma</em> (間)—which translates to 'negative space' or 'the silence between notes'—to the minimal soundscapes of John Cage, emptiness has long functioned as a structural container. This chapter establishes a theoretical framework that connects physical minimalist sculpture with emerging digital structures of silence.</p>
+            <p>Noufan Muthiri is a Visualization Faculty, digital artist, creative educator, and entrepreneur from Kerala, India. As the Founder of Muthiri Creative School and Muthiri Creative Consultancy, he mentors aspiring artists, designers, and creative professionals while providing high-level creative direction, branding, and visual communication solutions.</p>
+            <p>With over 8 years of dedicated teaching experience in art and design, backed by a Bachelor of Fine Arts (BFA) and Master of Fine Arts (MFA) in Applied Art, Noufan has committed his career to fostering visual thinking, critical discourse, and artistic excellence across traditional and digital mediums.</p>
             <blockquote>
-              "Empty space is not an absence. It is a presence that demands observation, a clearing in which thought can finally crystallize."
+              "Visual education and creative practice are not distinct domains. They form a continuous dialogue between cultural memory, technical mastery, and spatial awareness."
             </blockquote>
-            <p>By tracing the genealogy of empty space from mid-century minimalism to current web-art practices, we can understand how digital voids counteract the overwhelming weight of modern algorithmic interfaces. Rather than treating white space as a placeholder for content, we must analyze it as the content itself.</p>
           `
         },
         {
           id: "chapter-2",
           num: "Chapter II",
-          title: "Brutalist Webs & Digital Deserts",
+          title: "Cultural Heritage & Sufi Mysticism",
           content: `
-            <p>Web interfaces have evolved into uniform, highly optimized marketing machines. The 'SaaS landing page' archetype has stripped the digital environment of its experimental culture. This chapter analyses 'brutalist websites' and 'digital deserts'—spaces on the internet designed with zero user tracking, extreme layouts, and deliberate whitespace.</p>
-            <p>Through visual analysis of net-art archives, we demonstrate how these digital deserts evoke feelings akin to standing inside an empty concrete gallery. They reject the commodified UX patterns in favor of visual friction, raw HTML structure, and intellectual distance.</p>
+            <p>Noufan's artistic practice is deeply rooted in the rich cultural landscape of the Malabar Mappila Muslim community. Through contemporary digital media, his work explores Mappila folklore, Sufi mysticism, and poetic visual narration.</p>
+            <p>His research-driven projects reinterpret complex themes of identity, migration, spirituality, memory, and cultural transformation. By pairing historic community narratives with contemporary minimalist interfaces, he crafts digital spaces that honor spiritual heritage while challenging modern algorithmic visual standards.</p>
+          `
+        },
+        {
+          id: "chapter-3",
+          num: "Chapter III",
+          title: "Exhibitions, Recognition & Spatial Voids",
+          content: `
+            <p>His artworks have achieved wide recognition across premier state, national, and international art platforms. Noufan's works were selected for the 52nd Kerala Government State Exhibition of Art, the National Art Camp (Akhi Camp), and the First International Kala Mela in Delhi.</p>
+            <p>Additionally, his new media digital artworks have been exhibited at the prestigious NNC Art Gallery in London, marking a significant milestone in his contribution to contemporary global digital art. Through his ongoing research into spatial voids, brutalist web aesthetics, and creative direction at Muthiri Creative Consultancy, he continues to shape new paradigms in visual culture.</p>
           `
         }
       ]

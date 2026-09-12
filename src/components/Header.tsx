@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSound } from "@/hooks/useSound";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 export function Header() {
   const pathname = usePathname();
-  const { toggleSound, isPlayingRef } = useSound();
-  const [isPlaying, setIsPlaying] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -17,18 +15,10 @@ export function Header() {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleSound = useCallback(() => {
-    const result = toggleSound();
-    if (result !== undefined) {
-      setIsPlaying(result);
-    }
-  }, [toggleSound]);
 
   const isActive = (path: string) => {
     if (path === "/work") return pathname.startsWith("/work");
@@ -48,70 +38,29 @@ export function Header() {
         className="fixed top-0 left-0 w-full z-[100] pointer-events-none"
         style={{ padding: "var(--site-padding-y) var(--site-padding-x)" }}
       >
-        <div className="flex justify-between items-center pointer-events-auto">
-          <div className={`flex items-center gap-[15px] transition-all duration-[500ms] ease-in-out ${scrolled || mobileOpen ? "opacity-0 pointer-events-none -translate-y-[10px]" : "opacity-100"}`}>
-            {pathname !== "/" && (
-              <Link
-                href={
-                  pathname.startsWith("/work/")
-                    ? "/work"
-                    : pathname.startsWith("/writing/")
-                      ? "/writing"
-                      : "/"
-                }
-                className="hover-trigger group inline-flex items-center justify-center w-[38px] h-[38px] rounded-full bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-fg-secondary hover:text-white transition-all duration-300 backdrop-blur-[12px]"
-                data-cursor="magnetic"
-                aria-label={
-                  pathname.startsWith("/work/")
-                    ? "Back to work archive"
-                    : pathname.startsWith("/writing/")
-                      ? "Back to writing"
-                      : "Back to home"
-                }
-              >
-                <svg
-                  className="w-4 h-4 transition-transform duration-300 ease-out group-hover:-translate-x-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  />
-                </svg>
-              </Link>
-            )}
-            <Link href="/" className="hover-trigger no-underline flex flex-col gap-[4px]" data-cursor="magnetic">
-              <span className="font-display font-extrabold text-[1.1rem] tracking-[0.3em] uppercase leading-none text-fg-primary">
+        <div className="flex justify-between items-center pointer-events-auto max-w-[1400px] mx-auto">
+          {/* Brand Logo Wordmark */}
+          <div
+            className={`transition-all duration-500 ease-in-out ${
+              scrolled || mobileOpen
+                ? "opacity-0 pointer-events-none -translate-y-[10px]"
+                : "opacity-100"
+            }`}
+          >
+            <Link
+              href="/"
+              className="hover-trigger no-underline flex flex-col gap-0.5"
+              data-cursor="magnetic"
+            >
+              <span className="font-display font-extrabold text-[1.05rem] tracking-[0.28em] uppercase leading-none text-fg-primary">
                 Muthiri
-              </span>
-              <span className="font-poppins text-[0.55rem] font-medium tracking-[0.18em] uppercase text-fg-secondary">
-                Creative Consulting
               </span>
             </Link>
           </div>
 
+          {/* Central Navigation Pill with Generous Horizontal & Vertical Padding */}
           <nav className="hidden md:block">
-            <ul
-              className="
-    flex
-    items-center
-    justify-center
-    min-w-[450px]
-    h-[50px]
-    gap-[3.5rem]
-    px-[50px]
-    bg-black/40
-    backdrop-blur-[12px]
-    rounded-full
-    border
-    border-white/5
-  "
-            >
+            <ul className="flex items-center justify-center gap-14 md:gap-16 px-14 py-4 md:px-16 md:py-4.5 bg-[#121212]/95 backdrop-blur-md rounded-full border border-white/15 shadow-lg">
               {[
                 { href: "/work", label: "Work" },
                 { href: "/writing", label: "Writing" },
@@ -121,14 +70,19 @@ export function Header() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`group hover-trigger no-underline font-sans text-[0.8rem] font-normal tracking-[0.12em] uppercase text-fg-secondary transition-colors duration-300 relative py-[4px] ${isActive(link.href) ? "text-white" : "hover:text-white"
-                      }`}
+                    className={`group hover-trigger no-underline font-sans text-[0.85rem] md:text-[0.88rem] font-medium tracking-[0.18em] uppercase transition-colors duration-300 relative py-1 ${
+                      isActive(link.href)
+                        ? "text-white font-semibold"
+                        : "text-fg-secondary hover:text-white"
+                    }`}
                   >
                     {link.label}
                     <span
-                      className={`absolute bottom-0 left-0 w-full h-[1px] bg-fg-primary transition-transform duration-[400ms] origin-right ${isActive(link.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100 group-hover:origin-left"
-                        }`}
-                      style={{ transitionTimingFunction: "var(--transition-smooth)" }}
+                      className={`absolute bottom-0 left-0 w-full h-[1px] bg-white transition-transform duration-300 origin-right ${
+                        isActive(link.href)
+                          ? "scale-x-100"
+                          : "scale-x-0 group-hover:scale-x-100 group-hover:origin-left"
+                      }`}
                     />
                   </Link>
                 </li>
@@ -136,38 +90,26 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-[20px]">
+          {/* Mobile Menu Trigger */}
+          <div className="flex items-center">
             <button
-              onClick={handleSound}
-              className={`hover-trigger bg-transparent border-none text-fg-secondary flex items-center gap-[8px] px-[12px] py-[6px] rounded-[40px] border border-white/5 bg-black/40 backdrop-blur-[12px] transition-all duration-[500ms] ease-in-out hover:text-fg-primary hover:border-white/20 ${isPlaying ? "sound-playing" : ""
-                } ${scrolled ? "md:opacity-0 md:pointer-events-none md:-translate-y-[10px]" : "opacity-100"} ${mobileOpen ? "opacity-0 pointer-events-none" : ""}`}
-              aria-label="Toggle exhibition hum"
-              data-cursor="magnetic"
-            >
-              <span className="sound-wave">
-                <span className="bar" />
-                <span className="bar" />
-                <span className="bar" />
-              </span>
-              <span className="font-sans text-[0.65rem] tracking-[0.15em] font-medium hidden sm:inline">
-                {isPlaying ? "SOUND ON" : "SOUND OFF"}
-              </span>
-            </button>
-
-            <button
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`hover-trigger bg-transparent border-none flex md:hidden flex-col justify-center gap-[5px] w-[30px] h-[30px] p-[5px] z-[200] ${mobileOpen ? "active" : ""
-                }`}
+              className={`hover-trigger bg-[#121212]/95 border border-white/20 rounded-xl flex md:hidden flex-col items-center justify-center gap-[5px] w-[42px] h-[42px] p-2.5 z-[200] shadow-lg backdrop-blur-md active:scale-95 transition-all duration-300 ${
+                mobileOpen ? "active bg-black border-white/40" : "hover:border-white/40 hover:bg-black"
+              }`}
               aria-label="Toggle menu"
             >
               <span
-                className={`w-[20px] h-[1px] bg-fg-primary transition-transform duration-[400ms] ${mobileOpen ? "translate-y-[3px] rotate-45" : ""
-                  }`}
+                className={`w-[20px] h-[1.5px] bg-fg-primary transition-transform duration-[400ms] ${
+                  mobileOpen ? "translate-y-[3.25px] rotate-45" : ""
+                }`}
                 style={{ transitionTimingFunction: "var(--transition-smooth)" }}
               />
               <span
-                className={`w-[20px] h-[1px] bg-fg-primary transition-transform duration-[400ms] ${mobileOpen ? "-translate-y-[3px] -rotate-45" : ""
-                  }`}
+                className={`w-[20px] h-[1.5px] bg-fg-primary transition-transform duration-[400ms] ${
+                  mobileOpen ? "-translate-y-[3.25px] -rotate-45" : ""
+                }`}
                 style={{ transitionTimingFunction: "var(--transition-smooth)" }}
               />
             </button>
@@ -175,17 +117,21 @@ export function Header() {
         </div>
       </header>
 
+      {/* Mobile Drawer Menu */}
       <div
-        className={`fixed top-0 left-0 w-screen h-screen bg-[#0b0b0b] z-[95] flex flex-col justify-between pb-[40px] pt-[100px] sm:pb-[50px] sm:pt-[120px] transition-transform duration-[600ms] md:hidden ${mobileOpen ? "translate-y-0" : "-translate-y-full"
-          }`}
-        style={{ paddingLeft: "var(--site-padding-x)", paddingRight: "var(--site-padding-x)", transitionTimingFunction: "var(--transition-smooth)" }}
+        className={`fixed top-0 left-0 w-screen h-screen bg-[#080808]/98 backdrop-blur-xl z-[95] flex flex-col justify-between pb-[40px] pt-[90px] px-6 transition-transform duration-[600ms] md:hidden ${
+          mobileOpen ? "translate-y-0" : "-translate-y-full"
+        }`}
+        style={{
+          transitionTimingFunction: "var(--transition-smooth)",
+        }}
         onClick={(e) => {
           const target = e.target as HTMLElement;
           if (target.tagName === "A") setMobileOpen(false);
         }}
       >
-        <nav>
-          <ul className="list-none flex flex-col gap-[20px] sm:gap-[30px]">
+        <nav className="flex-1 flex flex-col justify-center items-center">
+          <ul className="list-none flex flex-col items-center justify-center gap-[28px] text-center">
             {[
               { href: "/work", label: "Work" },
               { href: "/writing", label: "Writing" },
@@ -195,7 +141,7 @@ export function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="no-underline font-display text-[1.6rem] sm:text-[2rem] font-extrabold text-fg-primary hover:text-fg-secondary transition-colors duration-300 tracking-[-0.01em] block"
+                  className="no-underline font-display text-[2.2rem] sm:text-[2.6rem] font-extrabold text-white hover:text-fg-secondary transition-colors duration-300 tracking-[0.08em] uppercase block text-center"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -204,12 +150,15 @@ export function Header() {
             ))}
           </ul>
         </nav>
-        <div className="flex justify-between items-center border-t border-border-color pt-[30px]">
-          <p className="font-sans text-[0.65rem] text-fg-secondary tracking-[0.1em]">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 border-t border-white/10 pt-[24px] text-center">
+          <p className="font-sans text-[0.7rem] text-fg-muted tracking-[0.15em] uppercase">
             MULTIDISCIPLINARY ARCHIVE ©2026
           </p>
-          <Link href="/contact" className="no-underline font-sans text-[0.75rem] text-fg-primary border-b border-fg-primary">
-            Get in touch
+          <Link
+            href="/contact"
+            className="no-underline font-sans text-[0.8rem] text-white border-b border-white/40 pb-0.5 tracking-[0.1em] uppercase font-medium hover:border-white transition-colors"
+          >
+            Get in touch &rarr;
           </Link>
         </div>
       </div>

@@ -1,26 +1,13 @@
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
-import {
-  blogsQuery,
-} from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/image";
+import { portfolioDB } from "@/data/portfolio";
 
-export default async function WritingPage() {
-  const blogs = await client.fetch(blogsQuery);
-
-  if (!blogs) {
-    return (
-      <section className="pt-[180px] min-h-screen">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h1>No blogs found.</h1>
-        </div>
-      </section>
-    );
-  }
+export default function WritingPage() {
+  const blogs = portfolioDB.writing.blogs;
+  const coverImageUrl = "/assets/Noufan muthiri.webp";
 
   return (
     <section
-      className=" pb-[140px] min-h-screen"
+      className="pb-[140px] min-h-screen"
       style={{
         paddingTop: "180px",
 
@@ -30,7 +17,7 @@ export default async function WritingPage() {
     >
       <div className="max-w-[1200px] mx-auto">
         {/* Hero */}
-        <div className="border-b border-border-color pb-[8vh] mb-[12vh]">
+        <div className="border-b border-border-color mt-10 sm:mt-12 md:mt-0 pb-[8vh] mb-[12vh]">
           <h1 className="reveal-wrapper block overflow-hidden">
             <span className="reveal-text font-serif text-[5rem] max-sm:text-[3rem] font-light leading-[1]">
               WRITING &amp; RESEARCH
@@ -39,17 +26,13 @@ export default async function WritingPage() {
         </div>
 
         {/* Blogs Feature */}
-        <div className="fade-in bg-bg-secondary border border-border-color p-[50px] max-sm:p-[30px_20px] grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-[6vw] items-center mb-[18vh]">
+        <div className="fade-in bg-bg-secondary border border-border-color p-[50px] max-sm:p-[30px_20px] grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-[6vw] items-center mt-12 md:mt-16 mb-[18vh]">
           <div className="w-full aspect-[4/3] overflow-hidden border border-border-color">
-            {blogs.coverImage && (
-              <img
-                src={urlFor(blogs.coverImage)
-                  .width(1200)
-                  .url()}
-                alt={blogs.title}
-                className="w-full h-full object-cover grayscale"
-              />
-            )}
+            <img
+              src={coverImageUrl}
+              alt={blogs.title}
+              className="w-full h-full object-cover grayscale"
+            />
           </div>
 
           <div className="flex flex-col gap-[20px]">
@@ -73,8 +56,6 @@ export default async function WritingPage() {
             </Link>
           </div>
         </div>
-
-
       </div>
     </section>
   );
