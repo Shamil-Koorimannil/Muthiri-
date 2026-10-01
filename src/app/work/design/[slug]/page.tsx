@@ -19,11 +19,7 @@ export default async function DesignPage({
   if (!project) notFound();
 
   return (
-    <section className="min-h-screen">
-
-      {/* Header Spacer */}
-      <div className="h-[200px]" />
-
+    <section className="min-h-screen pt-[120px] md:pt-[180px]">
       <div
         className="max-w-[1400px] mx-auto mt-6 sm:mt-8 md:mt-0 mb-[8vh]"
         style={{

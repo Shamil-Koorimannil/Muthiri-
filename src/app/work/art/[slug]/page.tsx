@@ -21,11 +21,7 @@ export default async function ArtDetailPage({
   }
 
   return (
-    <section className="min-h-screen">
-
-      {/* Header Spacer */}
-      <div className="h-[220px]" />
-
+    <section className="min-h-screen pt-[120px] md:pt-[180px]">
       {/* Title */}
       <div
         className="max-w-[1400px] mx-auto mt-6 sm:mt-8 md:mt-0 mb-[100px]"

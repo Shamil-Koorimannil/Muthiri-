@@ -17,12 +17,8 @@ export default async function ProjectPage({
     }
 
     return (
-        <section className="min-h-screen">
+        <section className="min-h-screen pt-[120px] md:pt-[180px]">
             <div className="max-w-[1400px] mx-auto px-[5vw]">
-
-                {/* Space below fixed header */}
-                <div className="h-[180px]" />
-
                 {/* Project Intro */}
                 <div className="max-w-[1000px] mb-16">
                     <span className="font-sans text-[0.75rem] tracking-[0.3em] uppercase text-fg-muted block mb-4">
