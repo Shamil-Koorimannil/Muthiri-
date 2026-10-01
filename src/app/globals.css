@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme inline {
+@theme {
   --color-bg-primary: #080808;
   --color-bg-secondary: #121212;
   --color-bg-tertiary: #1a1a18;
@@ -11,10 +11,10 @@
   --color-border-color: #242422;
   --color-border-muted: #161615;
 
-  --font-serif: 'Helvetica', 'Arial', sans-serif;
-  --font-sans: 'Helvetica', 'Arial', sans-serif;
-  --font-display: 'Helvetica', 'Arial', sans-serif;
-  --font-poppins: 'Helvetica', 'Arial', sans-serif;
+  --font-serif: var(--font-serif), 'Helvetica', 'Arial', sans-serif;
+  --font-sans: var(--font-sans), 'Helvetica', 'Arial', sans-serif;
+  --font-display: var(--font-display), 'Helvetica', 'Arial', sans-serif;
+  --font-poppins: var(--font-poppins), 'Helvetica', 'Arial', sans-serif;
 }
 
 :root {
