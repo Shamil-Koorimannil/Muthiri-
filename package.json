@@ -10,27 +10,27 @@
     "postinstall": "node -e \"const fs = require('fs'); fs.copyFileSync('node_modules/pdfjs-dist/build/pdf.worker.min.mjs', 'public/pdf.worker.min.mjs');\""
   },
   "dependencies": {
-    "@portabletext/react": "^6.2.0",
-    "@sanity/icons": "^3.7.4",
-    "@sanity/image-url": "^2.1.1",
-    "@sanity/vision": "^5.30.0",
-    "@tailwindcss/postcss": "^4.0.0",
+    "@portabletext/react": "6.2.0",
+    "@sanity/icons": "3.7.4",
+    "@sanity/image-url": "2.1.1",
+    "@sanity/vision": "5.30.0",
+    "@tailwindcss/postcss": "4.3.0",
     "next": "16.3.8",
-    "next-sanity": "^12.4.5",
-    "pdfjs-dist": "^6.3.289",
-    "postcss": "^8.5.23",
+    "next-sanity": "12.4.5",
+    "pdfjs-dist": "6.3.289",
+    "postcss": "8.5.23",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "sanity": "^5.30.0",
-    "styled-components": "^6.4.2",
-    "tailwindcss": "^4.0.0"
+    "sanity": "5.30.0",
+    "styled-components": "6.4.2",
+    "tailwindcss": "4.3.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@types/node": "20.19.41",
+    "@types/react": "19.2.16",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.4",
     "eslint-config-next": "16.3.8",
-    "typescript": "^5"
+    "typescript": "5.9.3"
   }
 }

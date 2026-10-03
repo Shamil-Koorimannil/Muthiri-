@@ -6,6 +6,8 @@ export function useCursor() {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.location.pathname.startsWith("/studio")) return;
+
     const dot = document.querySelector(".cursor-dot") as HTMLElement | null;
     const ring = document.querySelector(".cursor-ring") as HTMLElement | null;
 

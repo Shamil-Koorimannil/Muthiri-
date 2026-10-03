@@ -10,11 +10,8 @@ export function ClientEffects() {
 
   const isStudio = pathname.startsWith("/studio");
 
-  // Only run portfolio effects outside Studio
-  if (!isStudio) {
-    useCursor();
-    useScrollReveal();
-  }
+  useCursor();
+  useScrollReveal();
 
   useEffect(() => {
     if (isStudio) {

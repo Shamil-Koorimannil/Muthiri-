@@ -8,6 +8,8 @@ export function useScrollReveal() {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    if (pathname.startsWith("/studio")) return;
+
     const options = { threshold: 0.01, rootMargin: "50px 0px 50px 0px" };
 
     const checkAndObserve = () => {
